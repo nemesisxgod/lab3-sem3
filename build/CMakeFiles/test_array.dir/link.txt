@@ -1,0 +1,1 @@
+/usr/bin/c++  -fprofile-arcs -ftest-coverage CMakeFiles/test_array.dir/tests_cplus/test_array.cpp.o CMakeFiles/test_array.dir/cplus/array.cpp.o -o test_array  /usr/lib/x86_64-linux-gnu/libboost_unit_test_framework.so.1.74.0 

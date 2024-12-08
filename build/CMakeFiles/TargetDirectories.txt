@@ -1,0 +1,10 @@
+/home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build/CMakeFiles/test_stack.dir
+/home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build/CMakeFiles/test_queue.dir
+/home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build/CMakeFiles/test_array.dir
+/home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build/CMakeFiles/test_hashtable.dir
+/home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build/CMakeFiles/test_tree.dir
+/home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build/CMakeFiles/test_list.dir
+/home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build/CMakeFiles/test_dlist.dir
+/home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build/CMakeFiles/test.dir
+/home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build/CMakeFiles/edit_cache.dir
+/home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build/CMakeFiles/rebuild_cache.dir

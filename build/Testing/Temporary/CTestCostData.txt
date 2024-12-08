@@ -1,0 +1,8 @@
+StackTests 39 0.000259938
+QueueTests 39 0.000263916
+DynamicArrayTests 36 0.000204321
+HashTableTests 23 0.000319951
+BinaryTreeTests 39 0.000148404
+LinkedListTests 30 0.000181659
+DoublyLinkedListTests 29 0.000226149
+---
