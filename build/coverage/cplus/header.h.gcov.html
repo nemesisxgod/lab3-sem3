@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2024-12-08 23:25:31</td>
+            <td class="headerValue">2024-12-09 23:11:11</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -212,10 +212,10 @@
 <a name="150"><span class="lineNum">     150 </span>            : class Stack {</a>
 <a name="151"><span class="lineNum">     151 </span>            : private:</a>
 <a name="152"><span class="lineNum">     152 </span>            :     struct Node {</a>
-<a name="153"><span class="lineNum">     153 </span>            :         std::string data;</a>
+<a name="153"><span class="lineNum">     153 </span>            :         string data;</a>
 <a name="154"><span class="lineNum">     154 </span>            :         Node* next;</a>
 <a name="155"><span class="lineNum">     155 </span>            : </a>
-<a name="156"><span class="lineNum">     156 </span><span class="lineCov">        342 :         Node(const std::string&amp; data) : data(data), next(nullptr) {}</span></a>
+<a name="156"><span class="lineNum">     156 </span><span class="lineCov">         38 :         Node(const string&amp; data) : data(data), next(nullptr) {}</span></a>
 <a name="157"><span class="lineNum">     157 </span>            :     };</a>
 <a name="158"><span class="lineNum">     158 </span>            : </a>
 <a name="159"><span class="lineNum">     159 </span>            :     Node* head;</a>
@@ -224,15 +224,15 @@
 <a name="162"><span class="lineNum">     162 </span>            :     Stack();</a>
 <a name="163"><span class="lineNum">     163 </span>            :     ~Stack();</a>
 <a name="164"><span class="lineNum">     164 </span>            : </a>
-<a name="165"><span class="lineNum">     165 </span>            :     void push(const std::string&amp; value);</a>
-<a name="166"><span class="lineNum">     166 </span>            :     std::string pop();</a>
+<a name="165"><span class="lineNum">     165 </span>            :     void push(const string&amp; value);</a>
+<a name="166"><span class="lineNum">     166 </span>            :     string pop();</a>
 <a name="167"><span class="lineNum">     167 </span>            :     void print() const;</a>
 <a name="168"><span class="lineNum">     168 </span>            :     void clear();</a>
-<a name="169"><span class="lineNum">     169 </span>            :     void load_from_file(const std::string&amp; filename);</a>
-<a name="170"><span class="lineNum">     170 </span>            :     void save_to_file(const std::string&amp; filename) const;</a>
+<a name="169"><span class="lineNum">     169 </span>            :     void load_from_file(const string&amp; filename);</a>
+<a name="170"><span class="lineNum">     170 </span>            :     void save_to_file(const string&amp; filename) const;</a>
 <a name="171"><span class="lineNum">     171 </span>            : </a>
-<a name="172"><span class="lineNum">     172 </span><span class="lineCov">        180 :     bool is_empty() const {</span></a>
-<a name="173"><span class="lineNum">     173 </span><span class="lineCov">        180 :         return head == nullptr;  // Если head равен nullptr, значит стек пуст</span></a>
+<a name="172"><span class="lineNum">     172 </span><span class="lineCov">         10 :     bool is_empty() const {</span></a>
+<a name="173"><span class="lineNum">     173 </span><span class="lineCov">         10 :         return head == nullptr;</span></a>
 <a name="174"><span class="lineNum">     174 </span>            :     }</a>
 <a name="175"><span class="lineNum">     175 </span>            : };</a>
 <a name="176"><span class="lineNum">     176 </span>            : </a>
@@ -244,7 +244,7 @@
 <a name="182"><span class="lineNum">     182 </span>            :     treeNode* left;</a>
 <a name="183"><span class="lineNum">     183 </span>            :     treeNode* right;</a>
 <a name="184"><span class="lineNum">     184 </span>            : </a>
-<a name="185"><span class="lineNum">     185 </span><span class="lineCov">        396 :     treeNode(int val) : value(val), left(nullptr), right(nullptr) {}</span></a>
+<a name="185"><span class="lineNum">     185 </span><span class="lineCov">         60 :     treeNode(int val) : value(val), left(nullptr), right(nullptr) {}</span></a>
 <a name="186"><span class="lineNum">     186 </span>            : };</a>
 <a name="187"><span class="lineNum">     187 </span>            : </a>
 <a name="188"><span class="lineNum">     188 </span>            : class QueueT {</a>
@@ -278,7 +278,7 @@
 <a name="216"><span class="lineNum">     216 </span>            :     bool search_tree(treeNode* node, int val) const;</a>
 <a name="217"><span class="lineNum">     217 </span>            : </a>
 <a name="218"><span class="lineNum">     218 </span>            : public:</a>
-<a name="219"><span class="lineNum">     219 </span><span class="lineCov">        108 :     BinaryTree() : root(nullptr) {}  // Конструктор по умолчанию</span></a>
+<a name="219"><span class="lineNum">     219 </span><span class="lineCov">          9 :     BinaryTree() : root(nullptr) {}  // Конструктор по умолчанию</span></a>
 <a name="220"><span class="lineNum">     220 </span>            :     ~BinaryTree();</a>
 <a name="221"><span class="lineNum">     221 </span>            : </a>
 <a name="222"><span class="lineNum">     222 </span>            :     bool is_complete() const;</a>

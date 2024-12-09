@@ -32,12 +32,12 @@ BOOST_AUTO_TEST_CASE(test_pop_empty) {
 
 BOOST_AUTO_TEST_CASE(test_print_empty) {
     Queue queue;
-    std::ostringstream output;
-    std::streambuf* original_cout = std::cout.rdbuf(output.rdbuf());
+    ostringstream output;
+    streambuf* original_cout = cout.rdbuf(output.rdbuf());
 
     queue.print();
 
-    std::cout.rdbuf(original_cout);
+    cout.rdbuf(original_cout);
     BOOST_CHECK_EQUAL(output.str(), "Queue is empty!\n");
 }
 
@@ -46,12 +46,12 @@ BOOST_AUTO_TEST_CASE(test_print_non_empty) {
     queue.push("first");
     queue.push("second");
 
-    std::ostringstream output;
-    std::streambuf* original_cout = std::cout.rdbuf(output.rdbuf());
+    ostringstream output;
+    streambuf* original_cout = cout.rdbuf(output.rdbuf());
 
     queue.print();
 
-    std::cout.rdbuf(original_cout);
+    cout.rdbuf(original_cout);
     BOOST_CHECK_EQUAL(output.str(), "first second \n");
 }
 
@@ -68,8 +68,7 @@ BOOST_AUTO_TEST_CASE(test_clear) {
 BOOST_AUTO_TEST_CASE(test_load_from_file) {
     Queue queue;
 
-    // Создание тестового файла
-    std::ofstream test_file("test_queue.txt");
+    ofstream test_file("test_queue.txt");
     test_file << "line1\nline2\nline3";
     test_file.close();
 
@@ -90,12 +89,12 @@ BOOST_AUTO_TEST_CASE(test_save_to_file) {
     queue.save_to_file("test_queue_save.txt");
 
     // Проверяем содержимое файла
-    std::ifstream test_file("test_queue_save.txt");
-    std::string line;
-    BOOST_CHECK(std::getline(test_file, line) && line == "line1");
-    BOOST_CHECK(std::getline(test_file, line) && line == "line2");
-    BOOST_CHECK(std::getline(test_file, line) && line == "line3");
-    BOOST_CHECK(!std::getline(test_file, line));
+    ifstream test_file("test_queue_save.txt");
+    string line;
+    BOOST_CHECK(getline(test_file, line) && line == "line1");
+    BOOST_CHECK(getline(test_file, line) && line == "line2");
+    BOOST_CHECK(getline(test_file, line) && line == "line3");
+    BOOST_CHECK(!getline(test_file, line));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

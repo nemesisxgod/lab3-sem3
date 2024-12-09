@@ -16,14 +16,14 @@ void Stack::push(const string& data) {
     head = newNode;
 }
 
-std::string Stack::pop() {
+string Stack::pop() {
     if (head == nullptr) {
         cout << "Stack is empty" << endl;
         return "";
     }
 
     Node* temp = head;
-    std::string poppedValue = head->data;
+    string poppedValue = head->data;
     head = head->next;
     delete temp;
 
@@ -62,13 +62,11 @@ void Stack::load_from_file(const string& filename) {
     string stroka;
     Stack tempStack;  // временный стек для хранения данных
 
-    // Загружаем данные в временный стек (элементы будут в порядке их прочтения)
     while (getline(file, stroka)) {
-        tempStack.push(stroka);  // Добавляем элементы в обратном порядке
+        tempStack.push(stroka);  
     }
     file.close();
 
-    // Переносим элементы из временного стека в основной стек
     while (!tempStack.is_empty()) {
         push(tempStack.pop());  // Перемещаем элементы в основной стек
     }

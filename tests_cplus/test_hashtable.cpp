@@ -13,26 +13,8 @@ BOOST_AUTO_TEST_CASE(test_insert_and_search) {
     BOOST_CHECK_EQUAL(table.search("key1"), "value1");
     BOOST_CHECK_EQUAL(table.search("key2"), "value2");
     BOOST_CHECK_EQUAL(table.search("key3"), "value3");
-    BOOST_CHECK_THROW(table.search("key4"), std::out_of_range);
+    BOOST_CHECK_THROW(table.search("key4"), out_of_range);
 }
-
-// BOOST_AUTO_TEST_CASE(test_remove_exception) {
-//     HashTable ht;
-//     ht.insert("key1", "value1");
-
-//     // Проверка удаления существующего ключа
-//     ht.remove("key1");
-//     BOOST_CHECK_THROW(ht.search("key1"), std::out_of_range);
-
-//     // Проверка на удаление несуществующего ключа
-//     std::stringstream output;
-//     std::streambuf* old_cout = std::cout.rdbuf(output.rdbuf());  // Перенаправляем вывод в строку
-
-//     ht.remove("key2");  // Ключ "key2" не существует
-//     BOOST_CHECK_THROW(ht.remove("key2"), std::out_of_range);  // Проверяем, что напечатано сообщение об ошибке
-
-//     std::cout.rdbuf(old_cout);  // Восстанавливаем стандартный вывод
-// }
 
 BOOST_AUTO_TEST_CASE(test_update_value) {
     HashTable table;
@@ -48,28 +30,29 @@ BOOST_AUTO_TEST_CASE(test_remove) {
     table.insert("key2", "value2");
 
     table.remove("key1");
-    BOOST_CHECK_THROW(table.search("key1"), std::out_of_range);
+    BOOST_CHECK_THROW(table.search("key1"), out_of_range);
     BOOST_CHECK_EQUAL(table.search("key2"), "value2"); // Остальные ключи остаются
 
     table.remove("key2");
-    BOOST_CHECK_THROW(table.search("key2"), std::out_of_range);
+    BOOST_CHECK_THROW(table.search("key2"), out_of_range);
 }
 
-// BOOST_AUTO_TEST_CASE(test_print) {
-//     HashTable ht;
-//     ht.insert("key1", "value1");
-//     ht.insert("key2", "value2");
-    
-//     std::stringstream output;
-//     std::streambuf* old_cout = std::cout.rdbuf(output.rdbuf());  // Перенаправляем вывод в строку
-    
-//     ht.print();  // Вызываем метод print
-    
-//     std::string expected_output = "Table[0]: nullptr\nTable[1]: {key2: value2} -> nullptr\nTable[2]: nullptr\n";  // Пример, ожидаемый вывод
-//     BOOST_CHECK_EQUAL(output.str(), expected_output);  // Проверка
-    
-//     std::cout.rdbuf(old_cout);  // Восстанавливаем стандартный вывод
-// }
+BOOST_AUTO_TEST_CASE(test_print) {
+    HashTable ht;
+    ht.insert("key1", "value1");
+    ht.insert("key2", "value2");
+
+    stringstream output;
+    streambuf* old_cout = cout.rdbuf(output.rdbuf());  // Перенаправляем вывод в строку
+
+    ht.print();  // Вызываем метод print
+
+    cout.rdbuf(old_cout);  // Восстанавливаем стандартный вывод
+
+    string expected_output = 
+        "Table[139]: {key1: value1} -> nullptr\nTable[170]: {key2: value2} -> nullptr\n";
+    BOOST_CHECK_EQUAL(output.str(), expected_output);
+}
 
 BOOST_AUTO_TEST_CASE(test_clear) {
     HashTable table;
@@ -77,13 +60,13 @@ BOOST_AUTO_TEST_CASE(test_clear) {
     table.insert("key2", "value2");
     table.clear();
 
-    BOOST_CHECK_THROW(table.search("key1"), std::out_of_range);
-    BOOST_CHECK_THROW(table.search("key2"), std::out_of_range);
+    BOOST_CHECK_THROW(table.search("key1"), out_of_range);
+    BOOST_CHECK_THROW(table.search("key2"), out_of_range);
 }
 
 BOOST_AUTO_TEST_CASE(test_load_from_file) {
     HashTable table;
-    std::ofstream file("test_hash_table.txt");
+    ofstream file("test_hash_table.txt");
     file << "key1 value1\nkey2 value2\nkey3 value3";
     file.close();
 
@@ -101,9 +84,9 @@ BOOST_AUTO_TEST_CASE(test_save_to_file) {
     table.insert("key3", "value3");
     table.save_to_file("output_hash_table.txt");
 
-    std::ifstream file("output_hash_table.txt");
-    std::string key, value;
-    std::map<std::string, std::string> result;
+    ifstream file("output_hash_table.txt");
+    string key, value;
+    map<string, string> result;
 
     while (file >> key >> value) {
         result[key] = value;
@@ -113,6 +96,33 @@ BOOST_AUTO_TEST_CASE(test_save_to_file) {
     BOOST_CHECK_EQUAL(result["key1"], "value1");
     BOOST_CHECK_EQUAL(result["key2"], "value2");
     BOOST_CHECK_EQUAL(result["key3"], "value3");
+}
+
+BOOST_AUTO_TEST_CASE(test_load_from_file_exception) {
+    HashTable ht;
+
+    stringstream output;
+    streambuf* old_cout = cout.rdbuf(output.rdbuf()); 
+
+    ht.load_from_file("non_existent_file.txt");
+
+    cout.rdbuf(old_cout); 
+
+    BOOST_CHECK_EQUAL(output.str(), "File is not found\n");
+}
+
+BOOST_AUTO_TEST_CASE(test_save_to_file_exception) {
+    HashTable ht;
+
+    string restricted_file = "/restricted_dir/restricted_file.txt";
+
+    stringstream output;
+    streambuf* old_cout = cout.rdbuf(output.rdbuf()); 
+    ht.save_to_file(restricted_file);
+
+    cout.rdbuf(old_cout); 
+
+    BOOST_CHECK_EQUAL(output.str(), "File not found\n");
 }
 
 BOOST_AUTO_TEST_CASE(test_collision_handling) {

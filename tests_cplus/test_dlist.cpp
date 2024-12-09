@@ -6,35 +6,32 @@
 
 BOOST_AUTO_TEST_SUITE(doubly_linked_list_tests)
 
-// Тест на добавление в начало списка
 BOOST_AUTO_TEST_CASE(test_add_to_head) {
     DoublyLinkedList list;
     list.add_to_head("A");
     list.add_to_head("B");
     list.add_to_head("C");
 
-    std::ostringstream output;
-    std::streambuf* old_buf = std::cout.rdbuf(output.rdbuf()); 
+    ostringstream output;
+    streambuf* old_buf = cout.rdbuf(output.rdbuf()); 
     list.print(); 
-    std::cout.rdbuf(old_buf);
+    cout.rdbuf(old_buf);
     BOOST_CHECK_EQUAL(output.str(), "C B A \n");
 }
 
-// Тест на добавление в конец списка
 BOOST_AUTO_TEST_CASE(test_add_to_tail) {
     DoublyLinkedList list;
     list.add_to_tail("A");
     list.add_to_tail("B");
     list.add_to_tail("C");
 
-    std::ostringstream output;
-    std::streambuf* old_buf = std::cout.rdbuf(output.rdbuf()); 
+    ostringstream output;
+    streambuf* old_buf = cout.rdbuf(output.rdbuf()); 
     list.print(); 
-    std::cout.rdbuf(old_buf);
+    cout.rdbuf(old_buf);
     BOOST_CHECK_EQUAL(output.str(), "A B C \n");
 }
 
-// Тест на удаление с головы списка
 BOOST_AUTO_TEST_CASE(test_remove_from_head) {
     DoublyLinkedList list;
     list.add_to_head("A");
@@ -43,14 +40,13 @@ BOOST_AUTO_TEST_CASE(test_remove_from_head) {
 
     list.remove_from_head();
     
-    std::ostringstream output;
-    std::streambuf* old_buf = std::cout.rdbuf(output.rdbuf()); 
+    ostringstream output;
+    streambuf* old_buf = cout.rdbuf(output.rdbuf()); 
     list.print(); 
-    std::cout.rdbuf(old_buf);
+    cout.rdbuf(old_buf);
     BOOST_CHECK_EQUAL(output.str(), "B A \n");
 }
 
-// Тест на удаление с хвоста списка
 BOOST_AUTO_TEST_CASE(test_remove_from_tail) {
     DoublyLinkedList list;
     list.add_to_head("A");
@@ -59,14 +55,24 @@ BOOST_AUTO_TEST_CASE(test_remove_from_tail) {
 
     list.remove_from_tail();
     
-    std::ostringstream output;
-    std::streambuf* old_buf = std::cout.rdbuf(output.rdbuf()); 
+    ostringstream output;
+    streambuf* old_buf = cout.rdbuf(output.rdbuf()); 
     list.print(); 
-    std::cout.rdbuf(old_buf);
+    cout.rdbuf(old_buf);
     BOOST_CHECK_EQUAL(output.str(), "A B \n");
 }
 
-// Тест на удаление по значению
+BOOST_AUTO_TEST_CASE(test_remove_from_tail_single_element) {
+    DoublyLinkedList list;
+
+    list.add_to_head("10");
+
+    list.remove_from_tail();
+
+    BOOST_CHECK(list.head == nullptr); 
+    BOOST_CHECK(list.tail == nullptr); 
+}
+
 BOOST_AUTO_TEST_CASE(test_remove_by_value) {
     DoublyLinkedList list;
     list.add_to_head("A");
@@ -75,14 +81,34 @@ BOOST_AUTO_TEST_CASE(test_remove_by_value) {
 
     list.remove_by_value("B");
 
-    std::ostringstream output;
-    std::streambuf* old_buf = std::cout.rdbuf(output.rdbuf()); 
+    ostringstream output;
+    streambuf* old_buf = cout.rdbuf(output.rdbuf()); 
     list.print(); 
-    std::cout.rdbuf(old_buf);
+    cout.rdbuf(old_buf);
     BOOST_CHECK_EQUAL(output.str(), "C A \n");
 }
 
-// Тест на поиск элемента
+BOOST_AUTO_TEST_CASE(test_load_from_file_with_content) {
+    DoublyLinkedList list;
+
+    ofstream file("test_file.txt");
+    file << "line1\n";
+    file << "line2\n";
+    file << "line3\n";
+    file.close();
+
+    // Загружаем данные из файла
+    list.load_from_file("test_file.txt");
+
+    // Проверяем содержимое списка
+    BOOST_CHECK_EQUAL(list.head->data, "line1");
+    BOOST_CHECK_EQUAL(list.head->next->data, "line2");
+    BOOST_CHECK_EQUAL(list.tail->data, "line3");
+    BOOST_CHECK(list.tail->next == nullptr);
+
+    remove("test_file.txt");
+}
+
 BOOST_AUTO_TEST_CASE(test_search) {
     DoublyLinkedList list;
     list.add_to_head("A");
@@ -98,19 +124,17 @@ BOOST_AUTO_TEST_CASE(test_search) {
     BOOST_CHECK(node == nullptr);
 }
 
-// Тест на загрузку данных из файла
 BOOST_AUTO_TEST_CASE(test_load_from_file) {
     DoublyLinkedList list;
     list.load_from_file("test_file.txt");
 
-    std::ostringstream output;
-    std::streambuf* old_buf = std::cout.rdbuf(output.rdbuf()); 
+    ostringstream output;
+    streambuf* old_buf = cout.rdbuf(output.rdbuf()); 
     list.print(); 
-    std::cout.rdbuf(old_buf);
+    cout.rdbuf(old_buf);
     BOOST_CHECK_EQUAL(output.str(), "\n");
 }
 
-// Тест на сохранение данных в файл
 BOOST_AUTO_TEST_CASE(test_upload_to_file) {
     DoublyLinkedList list;
     list.add_to_head("A");
@@ -119,17 +143,16 @@ BOOST_AUTO_TEST_CASE(test_upload_to_file) {
 
     list.upload_to_file("test_output.txt");
 
-    std::ifstream file("test_output.txt");
-    std::string line;
-    std::getline(file, line);
+    ifstream file("test_output.txt");
+    string line;
+    getline(file, line);
     BOOST_CHECK_EQUAL(line, "C");
-    std::getline(file, line);
+    getline(file, line);
     BOOST_CHECK_EQUAL(line, "B");
-    std::getline(file, line);
+    getline(file, line);
     BOOST_CHECK_EQUAL(line, "A");
 }
 
-// Тест на очистку списка
 BOOST_AUTO_TEST_CASE(test_free) {
     DoublyLinkedList list;
     list.add_to_head("A");
@@ -138,10 +161,10 @@ BOOST_AUTO_TEST_CASE(test_free) {
 
     list.free();
     
-    std::ostringstream output;
-    std::streambuf* old_buf = std::cout.rdbuf(output.rdbuf()); 
+    ostringstream output;
+    streambuf* old_buf = cout.rdbuf(output.rdbuf()); 
     list.print(); 
-    std::cout.rdbuf(old_buf);
+    cout.rdbuf(old_buf);
     BOOST_CHECK_EQUAL(output.str(), "\n");
 }
 

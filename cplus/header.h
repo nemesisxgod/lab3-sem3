@@ -150,10 +150,10 @@ public:
 class Stack {
 private:
     struct Node {
-        std::string data;
+        string data;
         Node* next;
 
-        Node(const std::string& data) : data(data), next(nullptr) {}
+        Node(const string& data) : data(data), next(nullptr) {}
     };
 
     Node* head;
@@ -162,15 +162,15 @@ public:
     Stack();
     ~Stack();
 
-    void push(const std::string& value);
-    std::string pop();
+    void push(const string& value);
+    string pop();
     void print() const;
     void clear();
-    void load_from_file(const std::string& filename);
-    void save_to_file(const std::string& filename) const;
+    void load_from_file(const string& filename);
+    void save_to_file(const string& filename) const;
 
     bool is_empty() const {
-        return head == nullptr;  // Если head равен nullptr, значит стек пуст
+        return head == nullptr;
     }
 };
 

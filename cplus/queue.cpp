@@ -26,7 +26,7 @@ void Queue::push(const string& value) {
     }
 }
 
-std::string Queue::pop() {
+string Queue::pop() {
     if (is_empty()) {
         cout << "Queue is empty!" << endl;
         return "";

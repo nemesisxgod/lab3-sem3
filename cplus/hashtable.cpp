@@ -4,19 +4,16 @@
 
 using namespace std;
 
-// Конструктор хэш-таблицы
 HashTable::HashTable() {
     for (int i = 0; i < TABLE_SIZE; ++i) {
         table[i] = nullptr;
     }
 }
 
-// Деструктор хэш-таблицы
 HashTable::~HashTable() {
     clear();
 }
 
-// Хэш-функция
 int HashTable::hash_function(const string& key) const {
     size_t hash = 2566341;
     for (auto c : key) {
@@ -51,7 +48,6 @@ void HashTable::insert(const string& key, const string& value) {
     prev->next = newNode;
 }
 
-// Поиск элемента
 string HashTable::search(const string& key) const {
     int index = hash_function(key);
     Node* temp = table[index];
@@ -63,10 +59,9 @@ string HashTable::search(const string& key) const {
         temp = temp->next;
     }
 
-    throw std::out_of_range("Key not found!");
+    throw out_of_range("Key not found!");
 }
 
-// Удаление элемента
 void HashTable::remove(const string& key) {
     int index = hash_function(key);
     Node* temp = table[index];
@@ -86,23 +81,23 @@ void HashTable::remove(const string& key) {
         temp = temp->next;
     }
 
-    throw std::out_of_range("Key not found!");
+    throw out_of_range("Key not found!");
 }
 
-// Вывод хэш-таблицы
 void HashTable::print() const {
     for (int i = 0; i < TABLE_SIZE; ++i) {
-        cout << "Table[" << i << "]: ";
-        Node* temp = table[i];
-        while (temp != nullptr) {
-            cout << "{" << temp->key << ": " << temp->value << "} -> ";
-            temp = temp->next;
+        if (table[i] != nullptr) {
+            cout << "Table[" << i << "]: ";
+            Node* temp = table[i];
+            while (temp != nullptr) {
+                cout << "{" << temp->key << ": " << temp->value << "} -> ";
+                temp = temp->next;
+            }
+            cout << "nullptr\n";
         }
-        cout << "nullptr" << endl;
     }
 }
 
-// Очистка хэш-таблицы
 void HashTable::clear() {
     for (int i = 0; i < TABLE_SIZE; ++i) {
         Node* current = table[i];
@@ -115,7 +110,6 @@ void HashTable::clear() {
     }
 }
 
-// Загрузка данных из файла
 void HashTable::load_from_file(const string& filename) {
     ifstream file(filename);
     if (!file.is_open()) {
@@ -133,7 +127,6 @@ void HashTable::load_from_file(const string& filename) {
     file.close();
 }
 
-// Сохранение данных в файл
 void HashTable::save_to_file(const string& filename) const {
     ofstream file(filename);
     if (!file.is_open()) {

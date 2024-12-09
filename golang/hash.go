@@ -1,4 +1,4 @@
-package main
+package hash
 
 import (
 	"fmt"
@@ -66,7 +66,7 @@ func (ht *HashTable) Search(key string) string {
 }
 
 // Remove - удаление элемента по ключу
-func (ht *HashTable) Remove(key string) {
+func (ht *HashTable) Remove(key string) error {
 	index := ht.hashFunction(key)
 	current := ht.table[index]
 	var prev *Node
@@ -78,26 +78,40 @@ func (ht *HashTable) Remove(key string) {
 			} else {
 				prev.next = current.next
 			}
-			return
+			return nil
 		}
 		prev = current
 		current = current.next
 	}
-	fmt.Println("Key not found!")
+	return fmt.Errorf("key not found")
+}
+
+// Реализуем метод String для хэш-таблицы
+func (ht *HashTable) String() string {
+	var builder strings.Builder
+	for i := 0; i < TableSize; i++ {
+		current := ht.table[i]
+		for current != nil {
+			builder.WriteString(fmt.Sprintf("Table[%d]: {%s: %s} \n", i, current.key, current.value))
+			current = current.next
+		}
+	}
+	return builder.String()
 }
 
 // Print - вывод хэш-таблицы
 func (ht *HashTable) Print() {
 	for i := 0; i < TableSize; i++ {
 		current := ht.table[i]
-		for current != nil {
+		if current != nil {
 			fmt.Printf("Table[%d]: ", i)
-			fmt.Printf("{%s: %s} -> ", current.key, current.value)
-			current = current.next
-			fmt.Println();
+			for current != nil {
+				fmt.Printf("{%s: %s}", current.key, current.value)
+				current = current.next
+			}
+			fmt.Println() // Здесь мы делаем перенос строки только после полного вывода связанного списка
 		}
 	}
-	fmt.Println();
 }
 
 // Clear - очистка хэш-таблицы
@@ -118,6 +132,10 @@ func (ht *HashTable) LoadFromFile(filename string) {
 
 	lines := strings.Split(string(data), "\n")
 	for _, line := range lines {
+		line = strings.TrimSpace(line) // Убираем лишние пробелы по краям
+		if line == "" {
+			continue // Пропускаем пустые строки
+		}
 		parts := strings.Split(line, " ")
 		if len(parts) == 2 {
 			ht.Insert(parts[0], parts[1])
@@ -140,51 +158,4 @@ func (ht *HashTable) SaveToFile(filename string) {
 	if err != nil {
 		fmt.Println("Error saving file:", err)
 	}
-}
-
-func (ht *HashTable) hashFunctionPrivate(key string) int {
-	hash := 0
-	for i := 0; i < len(key); i++ {
-		hash = (hash * 31) + int(key[i])
-	}
-	return hash % TableSize
-}
-
-func main() {
-	// Создание хэш-таблицы
-	ht := &HashTable{}
-
-	// Добавление элементов
-	ht.Insert("name", "Alice")
-	ht.Insert("age", "30")
-	ht.Insert("city", "Wonderland")
-	ht.Print()
-
-	// Поиск элемента
-	fmt.Println("Search 'name':", ht.Search("name"))
-	fmt.Println("Search 'age':", ht.Search("age"))
-	fmt.Println("Search 'city':", ht.Search("city"))
-	fmt.Println("Search 'country':", ht.Search("country")) // Не существует
-
-	// Удаление элемента
-	ht.Remove("age")
-	fmt.Println("After removing 'age':")
-	ht.Print()
-
-	// Вывод хэш-таблицы
-	fmt.Println("Current Hash Table:")
-	ht.Print()
-
-	// Сохранение в файл
-	ht.SaveToFile("data.txt")
-
-	// Очистка хэш-таблицы
-	ht.Clear()
-	fmt.Println("After clearing:")
-	ht.Print()
-
-	// Загрузка из файла
-	ht.LoadFromFile("data.txt")
-	fmt.Println("After loading from file:")
-	ht.Print()
 }
