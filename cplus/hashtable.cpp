@@ -90,10 +90,9 @@ void HashTable::print() const {
             cout << "Table[" << i << "]: ";
             Node* temp = table[i];
             while (temp != nullptr) {
-                cout << "{" << temp->key << ": " << temp->value << "} -> ";
+                cout << "{" << temp->key << ": " << temp->value << "}\n";
                 temp = temp->next;
             }
-            cout << "nullptr\n";
         }
     }
 }

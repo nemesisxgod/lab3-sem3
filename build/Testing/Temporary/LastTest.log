@@ -1,10 +1,10 @@
-Start testing: Dec 09 23:10 +07
+Start testing: Dec 10 21:42 +07
 ----------------------------------------------------------
 1/7 Testing: StackTests
 1/7 Test: StackTests
 Command: "/home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build/test_stack"
 Directory: /home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build
-"StackTests" start time: Dec 09 23:10 +07
+"StackTests" start time: Dec 10 21:42 +07
 Output:
 ----------------------------------------------------------
 Running 9 test cases...
@@ -12,12 +12,12 @@ Stack is empty
 Stack is empty
 
 [1;32;49m*** No errors detected
-[0;39;49mlibgcov profiling error:/home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build/CMakeFiles/test_stack.dir/tests_cplus/test_stack.cpp.gcda:overwriting an existing profile data with a different timestamp
+[0;39;49m
 <end of output>
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"StackTests" end time: Dec 09 23:10 +07
+"StackTests" end time: Dec 10 21:42 +07
 "StackTests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -25,7 +25,7 @@ Test Passed.
 2/7 Test: QueueTests
 Command: "/home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build/test_queue"
 Directory: /home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build
-"QueueTests" start time: Dec 09 23:10 +07
+"QueueTests" start time: Dec 10 21:42 +07
 Output:
 ----------------------------------------------------------
 Running 8 test cases...
@@ -33,12 +33,12 @@ Queue is empty!
 Queue is empty!
 
 [1;32;49m*** No errors detected
-[0;39;49mlibgcov profiling error:/home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build/CMakeFiles/test_queue.dir/tests_cplus/test_queue.cpp.gcda:overwriting an existing profile data with a different timestamp
+[0;39;49m
 <end of output>
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"QueueTests" end time: Dec 09 23:10 +07
+"QueueTests" end time: Dec 10 21:42 +07
 "QueueTests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -46,18 +46,18 @@ Test Passed.
 3/7 Test: DynamicArrayTests
 Command: "/home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build/test_array"
 Directory: /home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build
-"DynamicArrayTests" start time: Dec 09 23:10 +07
+"DynamicArrayTests" start time: Dec 10 21:42 +07
 Output:
 ----------------------------------------------------------
 Running 14 test cases...
 
 [1;32;49m*** No errors detected
-[0;39;49mlibgcov profiling error:/home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build/CMakeFiles/test_array.dir/tests_cplus/test_array.cpp.gcda:overwriting an existing profile data with a different timestamp
+[0;39;49m
 <end of output>
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"DynamicArrayTests" end time: Dec 09 23:10 +07
+"DynamicArrayTests" end time: Dec 10 21:42 +07
 "DynamicArrayTests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -65,7 +65,7 @@ Test Passed.
 4/7 Test: HashTableTests
 Command: "/home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build/test_hashtable"
 Directory: /home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build
-"HashTableTests" start time: Dec 09 23:10 +07
+"HashTableTests" start time: Dec 10 21:42 +07
 Output:
 ----------------------------------------------------------
 Running 10 test cases...
@@ -76,7 +76,7 @@ Running 10 test cases...
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"HashTableTests" end time: Dec 09 23:10 +07
+"HashTableTests" end time: Dec 10 21:42 +07
 "HashTableTests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -84,18 +84,18 @@ Test Passed.
 5/7 Test: BinaryTreeTests
 Command: "/home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build/test_tree"
 Directory: /home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build
-"BinaryTreeTests" start time: Dec 09 23:10 +07
+"BinaryTreeTests" start time: Dec 10 21:42 +07
 Output:
 ----------------------------------------------------------
 Running 9 test cases...
 
 [1;32;49m*** No errors detected
-[0;39;49mlibgcov profiling error:/home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build/CMakeFiles/test_tree.dir/tests_cplus/test_tree.cpp.gcda:overwriting an existing profile data with a different timestamp
+[0;39;49m
 <end of output>
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"BinaryTreeTests" end time: Dec 09 23:10 +07
+"BinaryTreeTests" end time: Dec 10 21:42 +07
 "BinaryTreeTests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -103,19 +103,19 @@ Test Passed.
 6/7 Test: LinkedListTests
 Command: "/home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build/test_list"
 Directory: /home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build
-"LinkedListTests" start time: Dec 09 23:10 +07
+"LinkedListTests" start time: Dec 10 21:42 +07
 Output:
 ----------------------------------------------------------
 Running 11 test cases...
 File not found
 
 [1;32;49m*** No errors detected
-[0;39;49mlibgcov profiling error:/home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build/CMakeFiles/test_list.dir/tests_cplus/test_list.cpp.gcda:overwriting an existing profile data with a different timestamp
+[0;39;49m
 <end of output>
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"LinkedListTests" end time: Dec 09 23:10 +07
+"LinkedListTests" end time: Dec 10 21:42 +07
 "LinkedListTests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -123,20 +123,20 @@ Test Passed.
 7/7 Test: DoublyLinkedListTests
 Command: "/home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build/test_dlist"
 Directory: /home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build
-"DoublyLinkedListTests" start time: Dec 09 23:10 +07
+"DoublyLinkedListTests" start time: Dec 10 21:42 +07
 Output:
 ----------------------------------------------------------
 Running 11 test cases...
 File not found
 
 [1;32;49m*** No errors detected
-[0;39;49mlibgcov profiling error:/home/nemesis/Рабочий стол/lab3-sem3/lab3-sem3/build/CMakeFiles/test_dlist.dir/tests_cplus/test_dlist.cpp.gcda:overwriting an existing profile data with a different timestamp
+[0;39;49m
 <end of output>
-Test time =   0.01 sec
+Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"DoublyLinkedListTests" end time: Dec 09 23:10 +07
+"DoublyLinkedListTests" end time: Dec 10 21:42 +07
 "DoublyLinkedListTests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Dec 09 23:10 +07
+End testing: Dec 10 21:42 +07

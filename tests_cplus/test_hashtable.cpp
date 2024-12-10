@@ -50,7 +50,7 @@ BOOST_AUTO_TEST_CASE(test_print) {
     cout.rdbuf(old_cout);  // Восстанавливаем стандартный вывод
 
     string expected_output = 
-        "Table[139]: {key1: value1} -> nullptr\nTable[170]: {key2: value2} -> nullptr\n";
+        "Table[139]: {key1: value1}\nTable[170]: {key2: value2}\n";
     BOOST_CHECK_EQUAL(output.str(), expected_output);
 }
 

@@ -1,15 +1,16 @@
-package tests_golang
+package hash
 
 import (
-	"io/ioutil"
-	hash "lab3-sem3/golang" // Импортируем ваш пакет с хэш-таблицей
+	"bytes"
+	"fmt"
+	"os"
 	"strings"
 	"testing"
 )
 
 // Тест для метода Insert
 func TestInsert(t *testing.T) {
-	ht := &hash.HashTable{}
+	ht := &HashTable{}
 	ht.Insert("name", "Alice")
 	ht.Insert("age", "30")
 
@@ -22,9 +23,26 @@ func TestInsert(t *testing.T) {
 	}
 }
 
+func TestInsertCollisions(t *testing.T) {
+	ht := &HashTable{}
+
+	// Вставляем элементы с одинаковым индексом хэширования
+	ht.Insert("name", "Alice")   // Первый элемент
+	ht.Insert("eman", "Bob")     // Коллизия (предположим, хэширует в тот же индекс)
+	ht.Insert("name", "Updated") // Обновление существующего ключа
+
+	// Проверяем значения
+	if result := ht.Search("name"); result != "Updated" {
+		t.Errorf("Expected 'Updated', got '%s'", result)
+	}
+	if result := ht.Search("eman"); result != "Bob" {
+		t.Errorf("Expected 'Bob', got '%s'", result)
+	}
+}
+
 // Тест для метода Search
 func TestSearch(t *testing.T) {
-	ht := &hash.HashTable{}
+	ht := &HashTable{}
 	ht.Insert("name", "Alice")
 
 	// Проверяем корректность поиска
@@ -42,7 +60,7 @@ func TestSearch(t *testing.T) {
 
 // Тест для метода Remove
 func TestRemove(t *testing.T) {
-	ht := &hash.HashTable{}
+	ht := &HashTable{}
 	ht.Insert("name", "Alice")
 	ht.Remove("name")
 
@@ -53,30 +71,44 @@ func TestRemove(t *testing.T) {
 	}
 }
 
-// Тест для метода Print (проверка вывода, можно сравнивать с ожиданием)
+// Тест для метода Print
 func TestPrint(t *testing.T) {
-	ht := &hash.HashTable{}
+	ht := &HashTable{}
 	ht.Insert("name", "Alice")
 	ht.Insert("age", "30")
 
-	// Захватываем вывод в буфер
-	var builder strings.Builder
-	// Направляем вывод хэш-таблицы в builder
-	builder.WriteString(ht.String())
+	// Перенаправляем вывод в буфер
+	var buffer bytes.Buffer
+	originalStdout := os.Stdout
+	r, w, _ := os.Pipe()
+	os.Stdout = w
 
-	// Ожидаемый вывод
-	expectedOutput := "Table[1]: {age: 30} \nTable[7]: {name: Alice} \n"
-	// Проверяем, соответствует ли вывод ожидаемому
-	if builder.String() != expectedOutput {
-		t.Errorf("Expected output: '%s', got '%s'", expectedOutput, builder.String())
+	// Вызываем Print, чтобы его вывод пошел в Pipe
+	go func() {
+		ht.Print()
+		w.Close()
+	}()
+
+	// Читаем вывод из Pipe
+	buffer.ReadFrom(r)
+	os.Stdout = originalStdout
+
+	// Ожидаемый результат
+	expectedOutput := "Table[1]: {age: 30}\nTable[7]: {name: Alice}\n"
+	if buffer.String() != expectedOutput {
+		t.Errorf("Expected output: '%s', got '%s'", expectedOutput, buffer.String())
 	}
 }
 
 // Тест для метода LoadFromFile
 func TestLoadFromFile(t *testing.T) {
-	ht := &hash.HashTable{}
+	ht := &HashTable{}
 	ht.Clear()
 
+	err := ht.LoadFromFile("nonexistent_file.txt")
+	if err != nil {
+		fmt.Println("Error loading file:", err)
+	}
 	// Загружаем данные из файла
 	ht.LoadFromFile("test_data.txt")
 
@@ -91,7 +123,7 @@ func TestLoadFromFile(t *testing.T) {
 
 // Тест для метода SaveToFile
 func TestSaveToFile(t *testing.T) {
-	ht := &hash.HashTable{}
+	ht := &HashTable{}
 	ht.Insert("name", "Alice")
 	ht.Insert("age", "30")
 
@@ -99,7 +131,7 @@ func TestSaveToFile(t *testing.T) {
 	ht.SaveToFile("test_data.txt")
 
 	// Проверяем, что файл был сохранен корректно
-	data, err := ioutil.ReadFile("test_data.txt")
+	data, err := os.ReadFile("test_data.txt")
 	if err != nil {
 		t.Fatalf("Failed to read file: %v", err)
 	}

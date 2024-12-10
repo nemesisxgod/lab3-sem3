@@ -13,6 +13,7 @@ using namespace std;
 //_____________________________________________________________________________________
 // Класс DynamicArray
 class DynamicArray {
+    friend void save_to_binary_array(const DynamicArray& arr, const string& filename);
 private:
     string* data = nullptr;
     size_t size = 0;
@@ -39,6 +40,7 @@ public:
 //_____________________________________________________________________________________
 // Класс HashTable
 class HashTable {
+    friend void save_to_binary_hash(const HashTable& table, const string& filename);
 private:
     struct Node {
         string key;
@@ -62,11 +64,13 @@ public:
     void clear();
     void load_from_file(const string& filename);
     void save_to_file(const string& filename) const;
+
 };
 
 //_____________________________________________________________________________________
 // Класс LinkedList
 class LinkedList {
+    friend void save_to_binary_list(const LinkedList& list, const string& filename);
 public:
     struct Node {
         string data;
@@ -123,6 +127,7 @@ public:
 //_____________________________________________________________________________________
 // Класс Queue
 class Queue {
+    friend void save_to_binary_queue(const Queue& queue, const string& filename);
 private:
     struct Node {
         string data;
@@ -148,6 +153,7 @@ public:
 //_____________________________________________________________________________________
 // Класс Stack
 class Stack {
+    friend void save_to_binary_stack(const Stack& stack, const string& filename);
 private:
     struct Node {
         string data;
@@ -205,6 +211,8 @@ public:
 };
 
 class BinaryTree {
+    friend void save_to_binary_tree(const BinaryTree& tree, const string& filename);
+    friend void load_from_binary_tree(BinaryTree& tree, const string& filename);
 private:
     treeNode* root;
 
